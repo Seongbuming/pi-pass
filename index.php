@@ -43,10 +43,12 @@ $mysqli = mysqli_connect($config['host'], $config['user'], $config['password'], 
             $('#message-result').text('완료되었습니다.');
             $('#message').show();
           } else {
-
+            $('#message-result').text('오류가 발생했습니다.');
+            $('#message').show();
           }
         }).fail(function() {
-          $('#message-result').text('')
+          $('#message-result').text('오류가 발생했습니다.');
+          $('#message').show();
         });
       });
     </script>
