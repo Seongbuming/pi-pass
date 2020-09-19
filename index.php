@@ -30,7 +30,8 @@ $mysqli = mysqli_connect($config['host'], $config['user'], $config['password'], 
 
     <script src="jquery.js"></script>
     <script>
-      $('#submit').click(function() {
+      $('#submit').click(function(e) {
+        e.preventDefault();
         $.ajax({
           type: 'post',
           url: 'submit.php',
