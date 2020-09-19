@@ -42,9 +42,11 @@ $mysqli = mysqli_connect($config['host'], $config['user'], $config['password'], 
           if (result === '1') {
             $('#message-result').text('완료되었습니다.');
             $('#message').show();
+          } else {
+
           }
         }).fail(function() {
-          
+          $('#message-result').text('')
         });
       });
     </script>
