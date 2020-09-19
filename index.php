@@ -24,7 +24,7 @@ $mysqli = mysqli_connect($config['host'], $config['user'], $config['password'], 
     </form>
 
     <div id="message" class="message">
-      <div class="message-result"></div>
+      <div id="message-result" class="message-result"></div>
       <button id="close-button" class="close-button">닫기</button>
     </div>
 
@@ -39,9 +39,12 @@ $mysqli = mysqli_connect($config['host'], $config['user'], $config['password'], 
           processData: false,
           data: new FormData($('#form')[0])
         }).done(function(result) {
-
+          if (result === '1') {
+            $('#message-result').text('완료되었습니다.');
+            $('#message').show();
+          }
         }).fail(function() {
-
+          
         });
       });
     </script>
