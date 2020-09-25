@@ -24,13 +24,14 @@ $mysqli = mysqli_connect($config['host'], $config['user'], $config['password'], 
     </form>
 
     <div id="message" class="message">
-      <div class="message-result"></div>
+      <div id="message-result" class="message-result"></div>
       <button id="close-button" class="close-button">닫기</button>
     </div>
 
     <script src="jquery.js"></script>
     <script>
-      $('#submit').click(function() {
+      $('#submit').click(function(e) {
+        e.preventDefault();
         $.ajax({
           type: 'post',
           url: 'submit.php',
@@ -39,9 +40,16 @@ $mysqli = mysqli_connect($config['host'], $config['user'], $config['password'], 
           processData: false,
           data: new FormData($('#form')[0])
         }).done(function(result) {
-
+          if (result === '1') {
+            $('#message-result').text('완료되었습니다.');
+            $('#message').show();
+          } else {
+            $('#message-result').text('오류가 발생했습니다.');
+            $('#message').show();
+          }
         }).fail(function() {
-
+          $('#message-result').text('오류가 발생했습니다.');
+          $('#message').show();
         });
       });
     </script>
