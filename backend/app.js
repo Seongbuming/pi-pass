@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response) => {
-  res.send('running');
+  response.send('running');
 });
 
 app.post('/submit', (request, response) => {
