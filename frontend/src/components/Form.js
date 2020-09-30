@@ -21,7 +21,7 @@ function Form(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post(`http://${window.location.hostname}:8081/submit`, {
+    axios.post(`http://${window.location.hostname}/submit`, {
       name: e.target.name.value,
       tell: e.target.tell.value
     }).then(response => {
