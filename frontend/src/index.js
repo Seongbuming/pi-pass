@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Icon } from '@material-ui/core';
@@ -21,6 +20,7 @@ const HeaderLink = styled.a`
 `;
 const Row = styled.div`
   margin: .5em 0;
+  text-align: center;
 `;
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -43,16 +43,17 @@ function Application(props) {
 
       <Form>
         <Row>
-          <TextField label="이름" />
+          <TextField name="name" label="이름" />
         </Row>
         <Row>
-          <TextField label="전화번호" />
+          <TextField name="tell" label="전화번호" />
         </Row>
         <Row>
           <Button
+            className={classes.button}
+            type="submit"
             variant="contained"
             color="primary"
-            className={classes.button}
             endIcon={<Icon>send</Icon>}
           >
             <span>등록</span>
