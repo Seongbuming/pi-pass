@@ -23,8 +23,11 @@ const Row = styled.div`
   text-align: center;
 `;
 const useStyles = makeStyles((theme) => ({
+  input: {
+    width: 'calc(100% - 50px)',
+  },
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   },
 }));
 

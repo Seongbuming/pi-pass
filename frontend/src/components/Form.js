@@ -15,28 +15,41 @@ const MessageWrapper = styled.div`
 `;
 
 function Form(props) {
+  const [infoMessage, setInfoMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (e.target.name.value.length === 0 || e.target.tell.value.length === 0) {
+      setInfoMessage(true);
+      setSuccessMessage(false);
+      setWarningMessage(false);
+      setErrorMessage(false);
+      return;
+    }
+
     axios.post(`http://${window.location.hostname}/submit`, {
       name: e.target.name.value,
       tell: e.target.tell.value
     }).then(response => {
       const success = parseInt(response.data) === 1;
       if (success) {
+        setInfoMessage(false);
         setSuccessMessage(true);
         setWarningMessage(false);
         setErrorMessage(false);
       } else {
+        setInfoMessage(false);
         setSuccessMessage(false);
         setWarningMessage(true);
         setErrorMessage(false);
       }
     }).catch(error => {
       console.log(error);
+      setInfoMessage(false);
       setSuccessMessage(false);
       setWarningMessage(false);
       setErrorMessage(true);
@@ -46,6 +59,25 @@ function Form(props) {
   return (
     <StyledForm onSubmit={handleSubmit}>
       <MessageWrapper>
+        <Collapse in={infoMessage}>
+          <Alert
+            severity="info"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setInfoMessage(false);
+                }}
+              >
+                <Close fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            <span>양식을 모두 입력하세요.</span>
+          </Alert>
+        </Collapse>
         <Collapse in={successMessage}>
           <Alert
             severity="success"
