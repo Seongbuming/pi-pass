@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider, useCookies } from 'react-cookie';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Icon } from '@material-ui/core';
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Application(props) {
   const classes = useStyles();
+  const [cookies] = useCookies('pi-pass');
   
   return (
     <CookiesProvider>
@@ -47,10 +48,10 @@ function Application(props) {
 
       <Form>
         <Row>
-          <TextField name="name" label="이름" />
+          <TextField name="name" label="이름" value={cookies.name} />
         </Row>
         <Row>
-          <TextField name="tell" label="전화번호" />
+          <TextField name="tell" label="전화번호" value={cookies.tell} />
         </Row>
         <Row>
           <Button

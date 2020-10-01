@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Collapse, IconButton } from '@material-ui/core';
@@ -19,6 +20,7 @@ function Form(props) {
   const [successMessage, setSuccessMessage] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies('pi-pass');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -35,12 +37,13 @@ function Form(props) {
       name: e.target.name.value,
       tell: e.target.tell.value
     }).then(response => {
-      const success = parseInt(response.data) === 1;
-      if (success) {
+      if (response.data.success) {
         setInfoMessage(false);
         setSuccessMessage(true);
         setWarningMessage(false);
         setErrorMessage(false);
+        setCookie('name', response.data.name, { path: '/' });
+        setCookie('tell', response.data.tell, { path: '/' });
       } else {
         setInfoMessage(false);
         setSuccessMessage(false);
