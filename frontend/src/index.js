@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CookiesProvider } from 'react-cookie';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Icon } from '@material-ui/core';
@@ -35,7 +36,7 @@ function Application(props) {
   const classes = useStyles();
   
   return (
-    <>
+    <CookiesProvider>
       <GlobalStyles />
 
       <Header>
@@ -63,7 +64,7 @@ function Application(props) {
           </Button>
         </Row>
       </Form>
-    </>
+    </CookiesProvider>
   );
 }
 
