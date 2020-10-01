@@ -33,7 +33,11 @@ app.post('/submit', (request, response) => {
     if (error) throw error;
   });
 
-  response.send('1');
+  response.send({
+    success: true,
+    name: request.body.name,
+    tell: request.body.tell
+  });
 });
 
 // catch 404 and forward to error handler

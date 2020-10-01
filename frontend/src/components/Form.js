@@ -37,6 +37,7 @@ function Form(props) {
       name: e.target.name.value,
       tell: e.target.tell.value
     }).then(response => {
+      console.log(response.data.success);
       if (response.data.success) {
         setInfoMessage(false);
         setSuccessMessage(true);
