@@ -18,7 +18,7 @@
     "styled-reset": "^4.2.3"
   },
   "scripts": {
-    "start": "export PORT=80 && react-scripts start",
+    "start": "export PORT=80 && forever start \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
